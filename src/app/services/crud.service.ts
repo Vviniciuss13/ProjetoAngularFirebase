@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
     providedIn: 'root',
 })
 
-export class AdminCrudService {
+export class CrudService {
     isLoading: boolean = false;
     handlerMessage = '';
     roleMessage = '';
