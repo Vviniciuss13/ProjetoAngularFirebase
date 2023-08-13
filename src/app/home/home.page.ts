@@ -12,9 +12,9 @@ export class HomePage {
   }
 
   getData(){
-    fetch('http://localhost/api/usuario/listar-todos')
-    // .then(T => T.json())
-    .then(console.log)
+    fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+    .then(dados => dados.json())
+    .then(dados => { console.log(dados) })
   }
 
 }
