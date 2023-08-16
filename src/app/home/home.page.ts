@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthenticateService } from '../services/auth.service';
+import { CrudService } from '../services/crud.service';
+import { MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-home',
@@ -7,14 +10,19 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {
-    this.getData();
+  constructor(
+    private _authenticate: AuthenticateService,
+    private _crudService: CrudService,
+    //public _storage: Storage,
+    private _message: MessageService
+  ) {}
+
+  criarConta(dados: any){
+    this._authenticate.register(dados.email, dados.password)
   }
 
-  getData(){
-    fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
-    .then(dados => dados.json())
-    .then(dados => { console.log(dados) })
+  realizarLogin(dados: any){
+    this._authenticate.login(dados.email, dados.password)
   }
 
 }
