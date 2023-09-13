@@ -34,7 +34,7 @@ export class HomePage {
 
     getData(){
       this.isLoading = true;
-      fetch('http://localhost/api_fatec/index.php')
+      fetch('http://localhost/api_fatec/clientes/listar.php')
       .then(response => response.json())
       .then(dados => {
           console.log(dados)
