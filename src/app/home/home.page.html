@@ -21,4 +21,47 @@
     </ion-col>
   </ion-row>
 
+  <ion-row>
+    <ion-col>
+      <form #insertFuncionario="ngForm" (ngSubmit)="inserir(insertFuncionario.value)"> <!-- variavel de template tipo um let -->
+        <ion-item lines="none">
+          <ion-label>Inserir Funcionario</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Nome" name="nome" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="sobrenome" name="sobrenome" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="cargo" name="cargo" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="data_nasc" name="nome" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="endereco" name="endereco" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="cidade" name="cidade" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="cep" name="cep" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="pais" name="pais" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="fone" name="fone" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="salario" name="salario" ngModel type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="nome">
+          <ion-button color="light" slot="end" type="submit">Inserir</ion-button>
+        </ion-item>
+      </form>
+    </ion-col>
+  </ion-row>
+
 </ion-content>

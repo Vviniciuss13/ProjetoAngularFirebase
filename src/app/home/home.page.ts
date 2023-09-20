@@ -4,6 +4,7 @@ import { CrudService } from '../services/crud.service';
 import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { MessageService } from '../services/message.service';
 import { error } from 'console';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -46,11 +47,12 @@ export class HomePage {
       headers: {
         'Content-Type': 'application/json',  
       },
-      body: JSON.stringify({CodFun: '123', Acao: 'remover'})
+      body: JSON.stringify({CodFun: cod, Acao: 'remover'})
     })
     .then(response => response.json())
     .then(response => {
-      console.log(response);
+      alert(response.menssagem)
+      this.getFuncionarios();
     })
     .catch(error => {
       console.log(error);
@@ -59,6 +61,30 @@ export class HomePage {
       this.isLoading = false;
     })
 
+  }
+
+  inserir(form: NgForm){
+    this.isLoading = true;
+    console.log(form);
+    fetch('http://localhost/api_atividade/funcionario/inserir_funcionarios.php',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form)
+    })
+    .then(response => response.json())
+    .then(response => {
+      alert(response.menssagem);
+      this.getFuncionarios();
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    .finally(() => {
+      this.isLoading = false;
+    })
   }
 
 }
