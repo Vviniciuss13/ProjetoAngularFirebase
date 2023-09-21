@@ -23,6 +23,7 @@ export class HomePage {
 
   isLoading: boolean = false;
   funcionarios: any;
+  funcionario: any;
 
   getFuncionarios(){
     this.isLoading = true;
@@ -65,7 +66,6 @@ export class HomePage {
 
   inserir(form: NgForm){
     this.isLoading = true;
-    console.log(form);
     fetch('http://localhost/api_atividade/funcionario/inserir_funcionarios.php',
     {
       method: 'POST',
@@ -81,6 +81,28 @@ export class HomePage {
     })
     .catch(error => {
       console.log(error)
+    })
+    .finally(() => {
+      this.isLoading = false;
+    })
+  }
+
+  selecionar(CodFun: any){
+    this.isLoading = true;
+    fetch('http://localhost/api_atividade/funcionario/listar_pelo_id_funcionario.php',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({CodFun: CodFun})
+    })
+    .then(response => response.json())
+    .then(response => {
+      this.funcionario = response.funcionario;
+      console.log(this.funcionario);
+    })
+    .catch(error => {
+      console.log(error);
     })
     .finally(() => {
       this.isLoading = false;

@@ -14,6 +14,7 @@
         <ng-container *ngFor="let funcionario of this.funcionarios">
           <ion-item>
             <ion-label>{{ funcionario.Nome }} - {{ funcionario.Cargo }}</ion-label>
+            <ion-icon name="create-outline" (click)="selecionar(funcionario.CodFun)"></ion-icon>
             <ion-icon name="trash-outline" (click)="remover(funcionario.CodFun)"></ion-icon>
           </ion-item>
         </ng-container>
@@ -37,7 +38,7 @@
           <ion-input label="cargo" name="cargo" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="data_nasc" name="nome" ngModel type="text"></ion-input>
+          <ion-input label="data_nasc" name="data_nasc" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input label="endereco" name="endereco" ngModel type="text"></ion-input>
