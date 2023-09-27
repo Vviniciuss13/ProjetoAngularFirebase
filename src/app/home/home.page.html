@@ -10,10 +10,21 @@
 
   <ion-row>
     <ion-col>
+        <form #searchForm="ngForm" (ngSubmit)="pesquisar(searchForm.value)">
+          <ion-item>
+            <ion-input label="Pesquisar" name="search" ngModel type="text"></ion-input>
+            <ion-button type="submit">Pesquisar</ion-button>
+          </ion-item>
+        </form>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
       <ion-list>
         <ng-container *ngFor="let funcionario of this.funcionarios">
           <ion-item>
-            <ion-label>{{ funcionario.Nome }} - {{ funcionario.Cargo }}</ion-label>
+            <ion-label>Nome: {{ funcionario.Nome }} - Cargo: {{ funcionario.Cargo }} - Cidade: {{ funcionario.Cidade }} - Telefone: {{ funcionario.Fone }}</ion-label>
             <ion-icon name="create-outline" (click)="selecionar(funcionario.CodFun)"></ion-icon>
             <ion-icon name="trash-outline" (click)="remover(funcionario.CodFun)"></ion-icon>
           </ion-item>
@@ -32,31 +43,31 @@
           <ion-input label="Nome" name="nome" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="sobrenome" name="sobrenome" ngModel type="text"></ion-input>
+          <ion-input label="Sobrenome" name="sobrenome" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="cargo" name="cargo" ngModel type="text"></ion-input>
+          <ion-input label="Cargo" name="cargo" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="data_nasc" name="data_nasc" ngModel type="text"></ion-input>
+          <ion-input label="Data de Nascimento" name="data_nasc" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="endereco" name="endereco" ngModel type="text"></ion-input>
+          <ion-input label="Endereco" name="endereco" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="cidade" name="cidade" ngModel type="text"></ion-input>
+          <ion-input label="Cidade" name="cidade" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="cep" name="cep" ngModel type="text"></ion-input>
+          <ion-input label="Cep" name="cep" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="pais" name="pais" ngModel type="text"></ion-input>
+          <ion-input label="Pais" name="pais" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="fone" name="fone" ngModel type="text"></ion-input>
+          <ion-input label="Fone" name="fone" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-input label="salario" name="salario" ngModel type="text"></ion-input>
+          <ion-input label="Salario" name="salario" ngModel type="text"></ion-input>
         </ion-item>
         <ion-item lines="nome">
           <ion-button color="light" slot="end" type="submit">Inserir</ion-button>

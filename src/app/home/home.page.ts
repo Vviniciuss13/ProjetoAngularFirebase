@@ -90,7 +90,7 @@ export class HomePage {
   selecionar(CodFun: any){
     this.isLoading = true;
     fetch('http://localhost/api_atividade/funcionario/listar_pelo_id_funcionario.php',{
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -98,8 +98,29 @@ export class HomePage {
     })
     .then(response => response.json())
     .then(response => {
-      this.funcionario = response.funcionario;
-      console.log(this.funcionario);
+      this.funcionario = response.funcionarios;
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      this.isLoading = false;
+    })
+  }
+
+  pesquisar(pesquisa: NgForm){
+    this.isLoading = true;
+    console.log(pesquisa);
+    fetch('http://localhost/api_atividade/funcionario/listar_funcionarios_filtro.php',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({pesquisa: pesquisa})
+    })
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
     })
     .catch(error => {
       console.log(error);
