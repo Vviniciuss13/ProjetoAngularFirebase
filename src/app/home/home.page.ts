@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthenticateService } from '../services/auth.service';
 import { CrudService } from '../services/crud.service';
 import { Storage, getDownloadURL, ref, uploadBytesResumable } from '@angular/fire/storage';
 import { MessageService } from '../services/message.service';
 import { error } from 'console';
 import { NgForm } from '@angular/forms';
+import { IonModal } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +14,30 @@ import { NgForm } from '@angular/forms';
 })
 export class HomePage {
 
-  constructor
-  (
-    
-  )
-  { 
+
+  constructor()
+  {
     this.getFuncionarios();
+  }
+
+  isModalOpen = false;
+
+  funcionario = {
+    id: '',
+    nome: '',
+    sobrenome: '',
+    cargo: '',
+    cep: '',
+    pais: '',
+    cidade: '',
+    fone: '',
+    data_nasc: '',
+    endereco: '',
+    salario: 0,
   }
 
   isLoading: boolean = false;
   funcionarios: any;
-  funcionario: any;
 
   getFuncionarios(){
     this.isLoading = true;
@@ -77,7 +91,7 @@ export class HomePage {
     .then(response => response.json())
     .then(response => {
       alert(response.menssagem);
-      this.getFuncionarios();
+      //this.getFuncionarios();
     })
     .catch(error => {
       console.log(error)
@@ -98,7 +112,17 @@ export class HomePage {
     })
     .then(response => response.json())
     .then(response => {
-      this.funcionario = response.funcionarios;
+      this.funcionario.id = response.funcionarios.CodFun
+      this.funcionario.nome = response.funcionarios.Nome
+      this.funcionario.sobrenome = response.funcionarios.Sobrenome
+      this.funcionario.cargo = response.funcionarios.Cargo
+      this.funcionario.cep = response.funcionarios.CEP
+      this.funcionario.pais = response.funcionarios.Pais
+      this.funcionario.cidade = response.funcionarios.Cidade
+      this.funcionario.fone = response.funcionarios.Fone
+      this.funcionario.data_nasc = response.funcionarios.DataNasc
+      this.funcionario.endereco = response.funcionarios.Endereco
+      this.funcionario.salario = response.funcionarios.Salario
     })
     .catch(error => {
       console.log(error);
@@ -128,6 +152,47 @@ export class HomePage {
     .finally(() => {
       this.isLoading = false;
     })
+  }
+
+  atualizar(form: NgForm){
+    this.isLoading = true;
+    console.log(form);
+    fetch('http://localhost/api_atividade/funcionario/atualizar_funcionario.php',
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(form)
+    })
+    .then(response => response.json())
+    .then(response => {
+      alert(response.menssagem)
+      this.getFuncionarios();
+    })
+    .catch(error => {
+      console.log(error)
+    })
+    .finally(() => {
+      this.isLoading = false;
+    })
+  }
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+    this.funcionario = {
+      id: '',
+      nome: '',
+      sobrenome: '',
+      cargo: '',
+      cep: '',
+      pais: '',
+      cidade: '',
+      fone: '',
+      data_nasc: '',
+      endereco: '',
+      salario: 0,
+    }
   }
 
 }
