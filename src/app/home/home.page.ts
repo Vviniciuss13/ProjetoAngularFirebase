@@ -14,6 +14,7 @@ import { IonModal } from '@ionic/angular';
 })
 export class HomePage {
 
+  @ViewChild(IonModal) modal: IonModal;
 
   constructor()
   {
@@ -21,6 +22,8 @@ export class HomePage {
   }
 
   isModalOpen = false;
+
+  type = '';
 
   funcionario = {
     id: '',
@@ -45,6 +48,7 @@ export class HomePage {
     .then(response => response.json())
     .then(response => {
       this.funcionarios = response.funcionarios;
+      this.type = typeof(this.funcionarios);
     })
     .catch(erro => {
       console.log(erro);
@@ -134,17 +138,17 @@ export class HomePage {
 
   pesquisar(pesquisa: NgForm){
     this.isLoading = true;
-    console.log(pesquisa);
     fetch('http://localhost/api_atividade/funcionario/listar_funcionarios_filtro.php',{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({pesquisa: pesquisa})
+      body: JSON.stringify(pesquisa)
     })
     .then(response => response.json())
     .then(response => {
-      console.log(response);
+      this.funcionarios = response.funcionarios
+      this.type = typeof(this.funcionarios);
     })
     .catch(error => {
       console.log(error);
@@ -178,8 +182,13 @@ export class HomePage {
     })
   }
 
-  setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
+  setOpen(){
+    if(this.isModalOpen == false){
+      this.isModalOpen = true;
+    }else{
+      this.modal.dismiss(null);
+      this.isModalOpen = false;
+    }
     this.funcionario = {
       id: '',
       nome: '',
@@ -194,5 +203,4 @@ export class HomePage {
       salario: 0,
     }
   }
-
 }
