@@ -95,7 +95,7 @@ export class HomePage {
     .then(response => response.json())
     .then(response => {
       alert(response.menssagem);
-      //this.getFuncionarios();
+      this.getFuncionarios();
     })
     .catch(error => {
       console.log(error)
